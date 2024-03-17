@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))])
-test_dataset=datasets.CIFAR10(root='C:\\Documents\\Python_Stuff\\Machine_Learning\\Datasets',train=False,download=True,transform=transform)
+test_dataset=datasets.CIFAR10(root='PATH TO STORE THE DOWNLOADED DATASET',train=False,download=True,transform=transform)
 test_loader=DataLoader(test_dataset,batch_size=32,shuffle=False)
 class Net(nn.Module):
     def __init__(self):
@@ -26,7 +26,7 @@ class Net(nn.Module):
         x=self.fc3(x)
         return x
 model=Net()
-model.load_state_dict(torch.load('Trained_Model_Params/cifar_trained_dataset_params.pth'))
+model.load_state_dict(torch.load('cifar_trained_dataset_params.pth'))
 model.eval()
 criterion=torch.nn.CrossEntropyLoss()
 total_correct=0
