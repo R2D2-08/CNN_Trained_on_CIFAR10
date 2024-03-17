@@ -7,9 +7,9 @@ import torch.nn.functional as F
 import multiprocessing
 def main():
     transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))]) #defines how the transform should take place, ToTensors changes the PIL image to torch tensor, normalization of the tensor with a mean and std of 0.5 for each channel, this normalization normalizes the pixel values in the range of [-1,1]
-    trainset=torchvision.datasets.CIFAR10(root='C:\\Documents\\Python_Stuff\\Machine_Learning\\Datasets',train=True,download=True,transform=transform) #torchvision loads the CIFAR dataset and applies the relevant transform
+    trainset=torchvision.datasets.CIFAR10(root='PATH TO STORE THE DOWNLOADED DATASET',train=True,download=True,transform=transform) #torchvision loads the CIFAR dataset and applies the relevant transform
     trainloader=torch.utils.data.DataLoader(trainset,batch_size=4,shuffle=True,num_workers=2) #loads a dataset to allow for iteration over it, number of subprocesses to use for data loading is specified by num_workers
-    testset=torchvision.datasets.CIFAR10(root='C:\\Documents\\Python_Stuff\\Machine_Learning\\Datasets',train=False,download=False,transform=transform)
+    testset=torchvision.datasets.CIFAR10(root='PATH TO STORE THE DOWNLOADED DATASET',train=False,download=False,transform=transform)
     testloader=torch.utils.data.DataLoader(testset,batch_size=4,shuffle=False,num_workers=2)
     #CNN architecture
     class Net(nn.Module):
@@ -45,7 +45,7 @@ def main():
             if i%2000==1999:
                 print(f'[{epoch+1}, {i+1}] loss: {current_loss/2000:.3f}')
                 current_loss=.0
-    torch.save(net.state_dict(),'Trained_Model_Params/cifar_trained_dataset_params.pth')
+    torch.save(net.state_dict(),'cifar_trained_dataset_params.pth')
 if __name__=='__main__':
     multiprocessing.freeze_support()
     main()
